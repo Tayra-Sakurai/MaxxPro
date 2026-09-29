@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MaxxPro (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MaxxPro (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

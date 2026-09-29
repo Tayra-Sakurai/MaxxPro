@@ -1,0 +1,18 @@
+﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+using Caiman.Models;
+using CommunityToolkit.Mvvm.Messaging.Messages;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Caiman.Messages
+{
+    public class ItemAddedMessage : ValueChangedMessage<Item>
+    {
+        public ItemAddedMessage(Item value) : base(value)
+        {
+        }
+    }
+}

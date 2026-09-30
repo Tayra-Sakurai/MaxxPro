@@ -51,6 +51,7 @@ jobs:
   upload:
     name: Make a release.
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       contents: write
 

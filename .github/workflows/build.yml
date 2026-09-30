@@ -1,0 +1,72 @@
+name: Build WinUI App
+
+on:
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: Notes on the release.
+        type: string
+        required: true
+
+      tag:
+        description: Release tag.
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build assets
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out the repo.
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0'
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v3
+
+      - name: Restore the App
+        run: msbuild MaxxPro /t:Restore /p:Configuration=Release /p:SelfContained=true /p:TargetFramework=net10.0-windows10.0.26100.0
+
+      - name: Build the App
+        run: msbuild MaxxPro /p:Configuration=Release /p:Platform=x64 /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true /p:SelfContained=true /p:TargetFramework=net10.0-windows10.0.26100.0 /p:GenerateAppxInstallerFile=true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          paths: |
+            MaxxPro/AppPackages/**/*.cer
+            MaxxPro/AppPackages/**/*.msix
+            MaxxPro/AppPackages/**/*.msixbundle
+          name: AppPackages
+
+  upload:
+    name: Make a release.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: AppPackages
+
+      - name: Make a release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            AppPackages/**/*.cer
+            AppPackages/**/*.msix
+            AppPackages/**/*.msixbundle
+          tag_name: ${{ inputs.tag }}
+          body: ${{ inputs.notes }}
+          draft: true

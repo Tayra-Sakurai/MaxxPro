@@ -24,7 +24,9 @@ namespace Caiman.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Item>();
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Life)
+                .HasDefaultValueSql("datetime('now') || 'Z'");
             modelBuilder.Entity<LargeCategory>()
                 .HasBaseType<Category>();
             modelBuilder.Entity<MediumCategory>()

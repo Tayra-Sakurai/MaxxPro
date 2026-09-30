@@ -3,6 +3,7 @@ using System;
 using Caiman.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Caiman.Migrations
 {
     [DbContext(typeof(CaimanContext))]
-    partial class CaimanContextModelSnapshot : ModelSnapshot
+    [Migration("20260930052603_UpdateLife")]
+    partial class UpdateLife
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
@@ -57,7 +60,7 @@ namespace Caiman.Migrations
                     b.Property<DateTimeOffset>("Life")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("datetime('now') || 'Z'");
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2026, 9, 30, 14, 26, 3, 78, DateTimeKind.Unspecified).AddTicks(2792), new TimeSpan(0, 9, 0, 0, 0)));
 
                     b.Property<string>("Name")
                         .IsRequired()

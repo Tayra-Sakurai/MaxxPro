@@ -195,24 +195,25 @@ namespace Caiman.ViewModels
             if (HasErrors)
                 return;
 
-            using CaimanContext caimanContext = await factory.CreateDbContextAsync();
-
-            if (category is SmallCategory smallCategory)
+            using (CaimanContext caimanContext = await factory.CreateDbContextAsync())
             {
-                smallCategory.Parent = null;
-                caimanContext.Update(smallCategory);
-            }
-            else if (category is MediumCategory mediumCategory)
-            {
-                mediumCategory.Parent = null;
-                caimanContext.Update(mediumCategory);
-            }
-            else if (category is LargeCategory largeCategory)
-                caimanContext.Update(largeCategory);
-            else
-                return;
+                if (category is SmallCategory smallCategory)
+                {
+                    smallCategory.Parent = null;
+                    caimanContext.Update(smallCategory);
+                }
+                else if (category is MediumCategory mediumCategory)
+                {
+                    mediumCategory.Parent = null;
+                    caimanContext.Update(mediumCategory);
+                }
+                else if (category is LargeCategory largeCategory)
+                    caimanContext.Update(largeCategory);
+                else
+                    return;
 
-            await caimanContext.SaveChangesAsync();
+                await caimanContext.SaveChangesAsync();
+            }
 
             if (category is LargeCategory largeCategory1)
                 WeakReferenceMessenger.Default.Send(new LargeCategoryUpdatedMessage(largeCategory1));
@@ -230,28 +231,33 @@ namespace Caiman.ViewModels
         [RelayCommand(AllowConcurrentExecutions = false)]
         private async Task RemoveAsync()
         {
-            using CaimanContext context = await factory.CreateDbContextAsync();
+            using (CaimanContext context = await factory.CreateDbContextAsync())
+            {
+                if (category is LargeCategory largeCategory)
+                {
+                    context.Remove(largeCategory);
+                    await context.SaveChangesAsync();
+                }
+                else if (category is MediumCategory mediumCategory)
+                {
+                    context.Remove(mediumCategory);
+                    await context.SaveChangesAsync();
+                }
+                else if (category is SmallCategory smallCategory)
+                {
+                    context.Remove(smallCategory);
+                    await context.SaveChangesAsync();
+                }
+                else
+                    return;
+            }
 
-            if (category is LargeCategory largeCategory)
-            {
-                context.Remove(largeCategory);
-                await context.SaveChangesAsync();
-                WeakReferenceMessenger.Default.Send(new LargeCategoryDeletedMessage(largeCategory));
-            }
-            else if (category is MediumCategory mediumCategory)
-            {
-                context.Remove(mediumCategory);
-                await context.SaveChangesAsync();
-                WeakReferenceMessenger.Default.Send(new MediumCategoryDeletedMessage(mediumCategory));
-            }
-            else if (category is SmallCategory smallCategory)
-            {
-                context.Remove(smallCategory);
-                await context.SaveChangesAsync();
-                WeakReferenceMessenger.Default.Send(new SmallCategoryDeletedMessage(smallCategory));
-            }
-            else
-                return;
+            if (category is LargeCategory largeCategory1)
+                WeakReferenceMessenger.Default.Send(new LargeCategoryDeletedMessage(largeCategory1));
+            else if (category is MediumCategory mediumCategory1)
+                WeakReferenceMessenger.Default.Send(new MediumCategoryDeletedMessage(mediumCategory1));
+            else if (category is SmallCategory smallCategory1)
+                WeakReferenceMessenger.Default.Send(new SmallCategoryDeletedMessage(smallCategory1));
         }
 
         public async void Receive(LargeCategoryAddedMessage message)

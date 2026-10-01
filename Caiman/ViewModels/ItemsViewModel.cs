@@ -43,8 +43,8 @@ namespace Caiman.ViewModels
                 await context
                 .Items
                 .Include(i => i.Category)
-                .ThenInclude(s => s.Parent)
-                .ThenInclude(s => s.Parent)
+                .ThenInclude(s => s!.Parent)
+                .ThenInclude(s => s!.Parent)
                 .Include(i => i.Place)
                 .OrderBy(i => i.Life)
                 .ThenBy(i => i.Name)

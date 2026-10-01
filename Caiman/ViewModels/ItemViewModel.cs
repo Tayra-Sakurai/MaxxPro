@@ -301,12 +301,12 @@ namespace Caiman.ViewModels
             await InitializeForExistingValueAsync(message.Value);
         }
 
-        protected virtual void OnActivated()
+        protected virtual partial void OnActivated()
         {
             Messenger.RegisterAll(this);
         }
 
-        protected virtual void OnDeactivated()
+        protected virtual partial void OnDeactivated()
         {
             Messenger.UnregisterAll(this);
         }

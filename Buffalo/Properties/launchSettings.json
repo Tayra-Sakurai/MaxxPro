@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Buffalo (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Buffalo (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

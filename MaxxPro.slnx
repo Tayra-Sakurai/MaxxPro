@@ -7,6 +7,12 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
+  <Project Path="Buffalo/Buffalo.csproj" Id="925301a5-d6f3-4fc5-b21e-f682950f43b4">
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
   <Project Path="Caiman/Caiman.csproj" />
   <Project Path="Cougar/Cougar.csproj" Id="f243cdb8-2e37-43f8-a26e-cbaa92e061f4" />
   <Project Path="MaxxPro/MaxxPro.csproj">

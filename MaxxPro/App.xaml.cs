@@ -4,7 +4,6 @@
 using Caiman.Contexts;
 using Caiman.ViewModels;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using Cougar.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -59,9 +58,6 @@ namespace MaxxPro
             {
                 await caimanContext.Database.MigrateAsync();
             }
-            IDbContextFactory<CougarContext> dbContextFactory1 = Ioc.Default.GetRequiredService<IDbContextFactory<CougarContext>>();
-            using (CougarContext cougarContext = await dbContextFactory1.CreateDbContextAsync())
-                await cougarContext.Database.MigrateAsync();
 
             _window = new MainWindow();
             _window.Activate();
@@ -73,8 +69,6 @@ namespace MaxxPro
 
             services.AddDbContextFactory<CaimanContext>(
                 optionsBuilder => optionsBuilder.UseSqlite($"Data Source={System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Caiman.db")}"));
-            services.AddDbContextFactory<CougarContext>(
-                optionsBuilder => optionsBuilder.UseSqlite($"Data Source={System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Cougar.db")}"));
 
             services.AddTransient<CategoriesViewModel>();
             services.AddTransient<CategoryViewModel>();

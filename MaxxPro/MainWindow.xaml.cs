@@ -29,6 +29,14 @@ namespace MaxxPro
         public MainWindow()
         {
             InitializeComponent();
+
+            Activated += MainWindow_Activated;
+        }
+
+        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            if (TestFrame.SourcePageType is null)
+                TestFrame.Navigate(typeof(Views.CategoriesView));
         }
     }
 }

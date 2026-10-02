@@ -12,7 +12,12 @@
     <WinUISDKReferences>false</WinUISDKReferences>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
+    <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Templates\TreeViewTemplates.xaml" />
+    <None Remove="Views\CategoriesView.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -53,6 +58,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Caiman\Caiman.csproj" />
     <ProjectReference Include="..\Cougar\Cougar.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Templates\TreeViewTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\CategoriesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

@@ -12,6 +12,7 @@
     <WinUIDSKReferences>false</WinUIDSKReferences>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
+    <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>

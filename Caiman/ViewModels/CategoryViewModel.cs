@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace Caiman.ViewModels
 
         private void CategoryViewModel_ErrorsChanged(object? sender, System.ComponentModel.DataErrorsChangedEventArgs e)
         {
+            Debug.WriteLine("Error state has been changed.");
             UpdateCommand.NotifyCanExecuteChanged();
         }
 
@@ -58,7 +60,7 @@ namespace Caiman.ViewModels
 
             MediumCategories.Clear();
 
-            if (LargeCategory is LargeCategory)
+            if (LargeCategory is not null)
                 foreach (
                     MediumCategory mediumCategory in
                     LargeCategory.Children)
@@ -69,6 +71,8 @@ namespace Caiman.ViewModels
         {
             await LoadAsync();
             using CaimanContext context = await factory.CreateDbContextAsync();
+
+            Debug.WriteLine($"Id: {category.Id}, Name: {category.Name}");
 
             if (category is LargeCategory largeCategory)
             {

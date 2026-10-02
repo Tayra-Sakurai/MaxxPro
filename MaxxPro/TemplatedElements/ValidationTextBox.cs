@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
@@ -35,8 +36,6 @@ namespace MaxxPro.TemplatedElements
         {
             base.OnApplyTemplate();
 
-            VisualStateManager.GoToState(this, "ValidState", false);
-
             textBlock = (TextBlock)GetTemplateChild("TextBlock");
             textBox = (TextBox)GetTemplateChild("TextBox");
 
@@ -46,6 +45,7 @@ namespace MaxxPro.TemplatedElements
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Text = ((TextBox)sender).Text;
+            Debug.WriteLine($"`Text` property has been changed: {Text}");
         }
 
         public string Text
@@ -147,7 +147,8 @@ namespace MaxxPro.TemplatedElements
             if (e.OldValue is INotifyDataErrorInfo viewModel)
                 viewModel.ErrorsChanged -= ((ValidationTextBox)d).ValidationTextBox_ErrorsChanged;
 
-            ((INotifyDataErrorInfo)e.NewValue).ErrorsChanged += ((ValidationTextBox)d).ValidationTextBox_ErrorsChanged;
+            if (e.NewValue is INotifyDataErrorInfo viewModel1)
+                viewModel1.ErrorsChanged += ((ValidationTextBox)d).ValidationTextBox_ErrorsChanged;
         }
 
         private void ValidationTextBox_ErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
@@ -168,12 +169,10 @@ namespace MaxxPro.TemplatedElements
             if (validationResult != null)
             {
                 textBlock1.Text = validationResult.ErrorMessage ?? string.Empty;
-                VisualStateManager.GoToState(this, "InvalidState", true);
             }
             else
             {
                 textBlock1.Text = string.Empty;
-                VisualStateManager.GoToState(this, "ValidState", true);
             }
         }
     }

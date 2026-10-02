@@ -9,36 +9,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local2:ValidationTextBox">
                     <StackPanel Spacing="4">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="ValidationStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition
-                                        To="InvalidState"
-                                        GeneratedDuration="0:0:0.25"/>
-                                </VisualStateGroup.Transitions>
-                                
-                                <VisualState x:Name="ValidState" />
-                                <VisualState x:Name="InvalidState">
-                                    <Storyboard>
-                                        <ColorAnimation
-                                            Storyboard.TargetName="TextBox"
-                                            Storyboard.TargetProperty="Foreground"
-                                            To="{StaticResource SystemErrorTextColor}"/>
-                                        <ColorAnimation
-                                            Storyboard.TargetName="TextBox"
-                                            Storyboard.TargetProperty="Background"
-                                            To="{StaticResource SystemControlErrorBackgroundColor}"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                         <TextBox
-                            x:Name="TextBox"
+                            Name="TextBox"
                             Text="{TemplateBinding Text}"
                             Header="{TemplateBinding Header}"
                             PlaceholderText="{TemplateBinding PlaceholderText}"
                             AcceptsReturn="{TemplateBinding AcceptsReturn}"
-                            TextWrapping="{TemplateBinding TextWrapping}"/>
+                            TextWrapping="{TemplateBinding TextWrapping}">
+                        </TextBox>
                         <TextBlock
                             Name="TextBlock"
                             Style="{StaticResource CaptionTextBlockStyle}"

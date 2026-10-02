@@ -1,6 +1,12 @@
 ﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+using Caiman.Contexts;
+using Caiman.ViewModels;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Cougar.Contexts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -9,6 +15,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
+using Microsoft.Windows.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,16 +45,45 @@ namespace MaxxPro
         public App()
         {
             InitializeComponent();
+            Ioc.Default.ConfigureServices(GetService());
         }
 
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            IDbContextFactory<CaimanContext> dbContextFactory = Ioc.Default.GetRequiredService<IDbContextFactory<CaimanContext>>();
+            using (CaimanContext caimanContext = await dbContextFactory.CreateDbContextAsync())
+            {
+                await caimanContext.Database.MigrateAsync();
+            }
+            IDbContextFactory<CougarContext> dbContextFactory1 = Ioc.Default.GetRequiredService<IDbContextFactory<CougarContext>>();
+            using (CougarContext cougarContext = await dbContextFactory1.CreateDbContextAsync())
+                await cougarContext.Database.MigrateAsync();
+
             _window = new MainWindow();
             _window.Activate();
+        }
+
+        private static ServiceProvider GetService()
+        {
+            ServiceCollection services = new ServiceCollection();
+
+            services.AddDbContextFactory<CaimanContext>(
+                optionsBuilder => optionsBuilder.UseSqlite($"Data Source={System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Caiman.db")}"));
+            services.AddDbContextFactory<CougarContext>(
+                optionsBuilder => optionsBuilder.UseSqlite($"Data Source={System.IO.Path.Combine(ApplicationData.GetDefault().LocalFolder.Path, "Cougar.db")}"));
+
+            services.AddTransient<CategoriesViewModel>();
+            services.AddTransient<CategoryViewModel>();
+            services.AddTransient<PlacesViewModel>();
+            services.AddTransient<PlaceViewModel>();
+            services.AddTransient<ItemsViewModel>();
+            services.AddTransient<ItemViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }

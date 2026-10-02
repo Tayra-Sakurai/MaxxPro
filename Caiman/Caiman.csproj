@@ -18,7 +18,6 @@
     <Nullable>enable</Nullable>
     <NeutralLanguage>ja-JP</NeutralLanguage>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\README.md">

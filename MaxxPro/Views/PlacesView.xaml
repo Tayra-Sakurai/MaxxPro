@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MaxxPro.Views.PlacesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MaxxPro.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tv="using:WinUI.TableView"
+    xmlns:te="using:MaxxPro.TemplatedElements"
+    xmlns:models="using:Caiman.Models"
+    mc:Ignorable="d models">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <tv:TableView
+            x:Name="PlacesTable"
+            ItemsSource="{x:Bind placesViewModel.Places}"
+            AutoGenerateColumns="False"
+            d:DataContext="{d:DesignInstance Type=models:Place}"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            SelectionUnit="Row">
+            <tv:TableView.Columns>
+                <tv:TableViewNumberColumn Binding="{Binding Id}" x:Uid="IdColumn"/>
+                <tv:TableViewTextColumn Binding="{Binding Name}" x:Uid="NameColumn" Width="*"/>
+                <tv:TableViewNumberColumn Binding="{Binding ItemsCount}" x:Uid="CountColumn"/>
+            </tv:TableView.Columns>
+        </tv:TableView>
+
+        <Border
+            Grid.Row="1"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultSolidBrush}"
+            Padding="4">
+            <Grid>
+                <te:ValidationTextBox
+                    Property="Name"
+                    Text="{x:Bind placeViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    x:Uid="NameBox"
+                    ViewModel="{x:Bind placeViewModel, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+
+        <CommandBar
+            Grid.Row="2"
+            DefaultLabelPosition="Bottom">
+            <AppBarButton
+                Icon="Add"
+                x:Uid="AddButton"
+                Command="{x:Bind placesViewModel.AddCommand}"/>
+            <AppBarButton
+                Icon="Edit"
+                x:Uid="EditButton"
+                Command="{x:Bind placesViewModel.InvokeCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=PlacesTable}"/>
+            <AppBarButton
+                Icon="SyncFolder"
+                x:Uid="SyncTableButton"
+                Command="{x:Bind placesViewModel.LoadCommand}"/>
+            <AppBarSeparator/>
+            <AppBarButton
+                Icon="Delete"
+                x:Uid="DeleteButton"
+                Command="{x:Bind placeViewModel.RemoveCommand}"/>
+            <AppBarButton
+                Icon="Save"
+                x:Uid="SaveButton"
+                Command="{x:Bind placeViewModel.UpdateCommand}"/>
+        </CommandBar>
+    </Grid>
+</Page>

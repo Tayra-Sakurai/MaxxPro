@@ -120,6 +120,9 @@
   <data name="AddButton.Label" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="CountColumn.Header" xml:space="preserve">
+    <value>Number of Items</value>
+  </data>
   <data name="DeleteButton.Label" xml:space="preserve">
     <value>Remove</value>
   </data>
@@ -136,6 +139,9 @@
     <value>Medium Category</value>
   </data>
   <data name="NameBox.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameColumn.Header" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="SaveButton.Label" xml:space="preserve">

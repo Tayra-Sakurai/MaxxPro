@@ -1,7 +1,7 @@
 ﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-using Buffalo.Fakes;
+using Buffalo.Fakes.Caiman;
 using Caiman.Contexts;
 using Caiman.Models;
 using Caiman.ViewModels;
@@ -21,22 +21,32 @@ namespace Buffalo.ViewModels.Caiman
         private CategoryViewModel? categoryViewModel;
         private static IDbContextFactory<CaimanContext>? factory;
 
-        [ClassInitialize]
-        public static void ClassSetup(TestContext testContext)
-        {
-            factory = new FakeCaimanContextFactory();
-            CaimanContext context = factory.CreateDbContext();
-            context.Database.Migrate();
-        }
-
         [TestInitialize]
         public void Setup()
         {
             if (factory == null)
                 factory = new FakeCaimanContextFactory();
 
+            using (CaimanContext context = factory.CreateDbContext())
+            {
+                context.Database.Migrate();
+            }
             categoriesViewModel = new(factory);
             categoryViewModel = new(factory);
+            categoriesViewModel.IsActive = true;
+            categoryViewModel.IsActive = true;
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            if (factory != null)
+            {
+                using CaimanContext context = factory.CreateDbContext();
+                context.Database.EnsureDeleted();
+            }
+            categoriesViewModel?.IsActive = false;
+            categoryViewModel?.IsActive = false;
         }
 
         [TestMethod]
@@ -53,7 +63,24 @@ namespace Buffalo.ViewModels.Caiman
             categoryViewModel.Name = "Test";
 
             await categoryViewModel.UpdateCommand.ExecuteAsync(null);
+            await Task.Delay(1000);
             Assert.IsNotEmpty(categoriesViewModel.LargeCategories);
+        }
+
+        [TestMethod]
+        public async Task Test_CantAddNewLargeCategoryWithInvalidName()
+        {
+            if (categoriesViewModel == null ||
+                categoryViewModel == null)
+                Assert.Fail("Setup incomplete.");
+
+            await categoriesViewModel.LoadAsync();
+            Assert.IsEmpty(categoriesViewModel.LargeCategories);
+
+            await categoriesViewModel.AddCommand.ExecuteAsync(null);
+
+            await categoryViewModel.UpdateCommand.ExecuteAsync(null);
+            Assert.IsEmpty(categoriesViewModel.LargeCategories);
         }
     }
 }

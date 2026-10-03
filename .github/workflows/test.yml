@@ -1,0 +1,40 @@
+name: Execute Buffalo test
+on:
+  workflow_dispatch:
+  
+  push:
+    branches:
+      - master
+    paths:
+      - Caiman/**
+      - Cougar/**
+      - Buffalo/**
+      - .github/workflows/test.yml
+
+  pull_request:
+    branches:
+      - master
+
+  check_run:
+    types:
+      - created
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build Buffalo and test it
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out the Repo
+        uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0'
+
+      - name: Conduct test
+        run: dotnet test Buffalo.csproj

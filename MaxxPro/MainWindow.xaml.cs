@@ -36,7 +36,7 @@ namespace MaxxPro
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
             if (TestFrame.SourcePageType is null)
-                TestFrame.Navigate(typeof(Views.CategoriesView));
+                TestFrame.Navigate(typeof(BasePage));
         }
     }
 }

@@ -120,11 +120,17 @@
   <data name="AddButton.Label" xml:space="preserve">
     <value>Add Item</value>
   </data>
+  <data name="CategoriesPageItem.Content" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="CountColumn.Header" xml:space="preserve">
     <value>Number of Items</value>
   </data>
   <data name="DeleteButton.Label" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="DescBox.Header" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="EditButton.Label" xml:space="preserve">
     <value>Edit</value>
@@ -132,8 +138,26 @@
   <data name="IdColumn.Header" xml:space="preserve">
     <value>Identity</value>
   </data>
+  <data name="ItemsPageItem.Content" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="LargeCategoryColumn.Header" xml:space="preserve">
+    <value>Large Category</value>
+  </data>
   <data name="LargeCategorySelect.Header" xml:space="preserve">
     <value>Large Category</value>
+  </data>
+  <data name="LifeColumn.Header" xml:space="preserve">
+    <value>Expiring Date</value>
+  </data>
+  <data name="LifeSetter.Header" xml:space="preserve">
+    <value>Expiring Date</value>
+  </data>
+  <data name="MainNavigation.PaneTitle" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MediumCategoryColumn.Header" xml:space="preserve">
+    <value>Medium Category</value>
   </data>
   <data name="MediumCategorySelect.Header" xml:space="preserve">
     <value>Medium Category</value>
@@ -144,13 +168,34 @@
   <data name="NameColumn.Header" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="PlacesPageItem.Content" xml:space="preserve">
+    <value>Places</value>
+  </data>
   <data name="SaveButton.Label" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SmallCategoryColumn.Header" xml:space="preserve">
+    <value>Small Category</value>
+  </data>
+  <data name="SmallCategorySelect.Header" xml:space="preserve">
+    <value>Small Category</value>
+  </data>
+  <data name="SourceTypeCategories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="SourceTypeItems" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="SourceTypePlaces" xml:space="preserve">
+    <value>Storages</value>
   </data>
   <data name="SyncButton.Label" xml:space="preserve">
     <value>Sync</value>
   </data>
   <data name="SyncTableButton.Label" xml:space="preserve">
     <value>Sync</value>
+  </data>
+  <data name="ViewsItem.Content" xml:space="preserve">
+    <value>View Items</value>
   </data>
 </root>

@@ -40,17 +40,18 @@ namespace Caiman.ViewModels
 
             foreach (
                 Item item in
-                await context
+                (await context
                 .Items
                 .Include(i => i.Category)
                 .ThenInclude(s => s!.Parent)
                 .ThenInclude(s => s!.Parent)
                 .Include(i => i.Place)
-                .OrderBy(i => i.Life)
-                .ThenBy(i => i.Name)
                 .AsNoTracking()
                 .AsSplitQuery()
                 .ToListAsync())
+                .OrderBy(i => i.Life)
+                .ThenBy(i => i.Name)
+                .ToList())
                 Items.Add(item);
         }
 

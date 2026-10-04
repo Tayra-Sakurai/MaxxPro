@@ -255,30 +255,7 @@ namespace Caiman.ViewModels
 
                 if (dateTimeOffset != item.Life.Date)
                 {
-                    TimeSpan timeOfDay = item.Life.TimeOfDay;
-
                     item.Life = dateTimeOffset.Date;
-                    item.Life += timeOfDay;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        [Required]
-        public TimeSpan? Time
-        {
-            get => item.Life.TimeOfDay;
-            set
-            {
-                ValidateProperty(value);
-
-                if (value is not TimeSpan timeOfDay)
-                    return;
-
-                if (timeOfDay != item.Life.TimeOfDay)
-                {
-                    item.Life = item.Life.Date;
-                    item.Life += timeOfDay;
                     OnPropertyChanged();
                 }
             }

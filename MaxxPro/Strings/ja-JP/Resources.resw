@@ -120,11 +120,17 @@
   <data name="AddButton.Label" xml:space="preserve">
     <value>追加</value>
   </data>
+  <data name="CategoriesPageItem.Content" xml:space="preserve">
+    <value>分類</value>
+  </data>
   <data name="CountColumn.Header" xml:space="preserve">
     <value>項目数</value>
   </data>
   <data name="DeleteButton.Label" xml:space="preserve">
     <value>削除</value>
+  </data>
+  <data name="DescBox.Header" xml:space="preserve">
+    <value>説明</value>
   </data>
   <data name="EditButton.Label" xml:space="preserve">
     <value>編集</value>
@@ -132,8 +138,26 @@
   <data name="IdColumn.Header" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="ItemsPageItem.Content" xml:space="preserve">
+    <value>品目</value>
+  </data>
+  <data name="LargeCategoryColumn.Header" xml:space="preserve">
+    <value>大分類</value>
+  </data>
   <data name="LargeCategorySelect.Header" xml:space="preserve">
     <value>大分類</value>
+  </data>
+  <data name="LifeColumn.Header" xml:space="preserve">
+    <value>期限</value>
+  </data>
+  <data name="LifeSetter.Header" xml:space="preserve">
+    <value>期限</value>
+  </data>
+  <data name="MainNavigation.PaneTitle" xml:space="preserve">
+    <value>メニュー</value>
+  </data>
+  <data name="MediumCategoryColumn.Header" xml:space="preserve">
+    <value>中分類</value>
   </data>
   <data name="MediumCategorySelect.Header" xml:space="preserve">
     <value>中分類</value>
@@ -144,13 +168,34 @@
   <data name="NameColumn.Header" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="PlacesPageItem.Content" xml:space="preserve">
+    <value>保管場所</value>
+  </data>
   <data name="SaveButton.Label" xml:space="preserve">
     <value>保存</value>
+  </data>
+  <data name="SmallCategoryColumn.Header" xml:space="preserve">
+    <value>小分類</value>
+  </data>
+  <data name="SmallCategorySelect.Header" xml:space="preserve">
+    <value>小分類</value>
+  </data>
+  <data name="SourceTypeCategories" xml:space="preserve">
+    <value>分類</value>
+  </data>
+  <data name="SourceTypeItems" xml:space="preserve">
+    <value>品目</value>
+  </data>
+  <data name="SourceTypePlaces" xml:space="preserve">
+    <value>保管場所</value>
   </data>
   <data name="SyncButton.Label" xml:space="preserve">
     <value>同期</value>
   </data>
   <data name="SyncTableButton.Label" xml:space="preserve">
     <value>テーブルを同期</value>
+  </data>
+  <data name="ViewsItem.Content" xml:space="preserve">
+    <value>一覧表示</value>
   </data>
 </root>

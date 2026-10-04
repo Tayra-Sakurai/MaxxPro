@@ -20,8 +20,10 @@
     <Content Remove="Assets\OllamaLogos\ollama.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="BasePage.xaml" />
     <None Remove="Templates\TreeViewTemplates.xaml" />
     <None Remove="Views\CategoriesView.xaml" />
+    <None Remove="Views\ItemsView.xaml" />
     <None Remove="Views\PlacesView.xaml" />
   </ItemGroup>
 
@@ -61,6 +63,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Caiman\Caiman.csproj" />
     <ProjectReference Include="..\Cougar\Cougar.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ItemsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\PlacesView.xaml">

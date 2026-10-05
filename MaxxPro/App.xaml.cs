@@ -85,7 +85,7 @@ namespace MaxxPro
                 sp =>
                 {
                     IChatClient innerClient = new OllamaApiClient(
-                        new Uri("http://localhost:11434"),
+                        new Uri("http://localhost:11434/api"),
                         "gemma:e2b");
 
                     return new ChatClientBuilder(innerClient)

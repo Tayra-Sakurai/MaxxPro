@@ -42,6 +42,7 @@ namespace Cougar.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(StartSessionCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ApproveRequestCommand))]
         public partial ChatClientState State { get; set; }
 
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanStartSession))]
@@ -52,6 +53,7 @@ namespace Cougar.ViewModels
             Messages.Clear();
 
             SendTextMessageCommand.NotifyCanExecuteChanged();
+            ApproveRequestCommand.NotifyCanExecuteChanged();
         }
 
         private bool CanStartSession()
@@ -85,6 +87,8 @@ namespace Cougar.ViewModels
                 response.Messages
                 .Where(e => e.Contents.All(c => c is TextContent)))
                 Messages.Add(chatMessage);
+
+            State = ChatClientState.Healthy;
         }
 
         [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSendTextMessage))]
@@ -104,7 +108,22 @@ namespace Cougar.ViewModels
 
         private bool CanSendTextMessage()
         {
-            return !string.IsNullOrWhiteSpace(Prompt) && session != null;
+            return !string.IsNullOrWhiteSpace(Prompt) && session != null && State == ChatClientState.Healthy;
+        }
+
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanApproveRequest))]
+        private async Task ApproveRequestAsync(ToolApprovalRequestContent? approvalRequestContent)
+        {
+            if (approvalRequestContent == null) return;
+            if (session == null) return;
+
+            ChatMessage chatMessage = new(ChatRole.Tool, [approvalRequestContent.CreateResponse(true)]);
+            await ReceiveMessage(chatMessage);
+        }
+
+        private bool CanApproveRequest(ToolApprovalRequestContent approvalRequestContent)
+        {
+            return approvalRequestContent != null && State == ChatClientState.Healthy && session != null;
         }
     }
 }

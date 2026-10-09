@@ -36,5 +36,11 @@ jobs:
         with:
           dotnet-version: '10.0'
 
+      - name: Setup Ollama
+        uses: ai-actions/setup-ollama@v2
+
+      - name: Pull Gemma4 E2B
+        run: ollama pull gemma4:e2b
+
       - name: Conduct test
         run: dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64

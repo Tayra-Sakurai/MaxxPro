@@ -7,7 +7,7 @@
     <WinUISDKReferences>false</WinUISDKReferences>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
-    <Version>0.0.1-alpha.1</Version>
+    <Version>0.0.1-alpha.2</Version>
     <Authors>Tayra Sakurai</Authors>
     <Description>The class library for MaxxPro.</Description>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>

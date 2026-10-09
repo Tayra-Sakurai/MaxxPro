@@ -44,6 +44,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="CommunityToolkit.VectorData.SqliteVec" Version="1.0.2-preview" />
+    <PackageReference Include="Markdig" Version="1.4.0" />
     <PackageReference Include="Microsoft.Agents.AI" Version="1.24.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />

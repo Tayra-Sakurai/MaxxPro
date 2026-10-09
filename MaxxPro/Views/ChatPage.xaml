@@ -6,9 +6,72 @@
     xmlns:local="using:MaxxPro.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:aiext="using:Microsoft.Extensions.AI"
     mc:Ignorable="d">
 
-    <Grid>
+    <Page.Resources>
+        <DataTemplate
+            x:Key="RequestTemplate"
+            x:DataType="aiext:ToolApprovalRequestContent">
+            <Grid Height="Auto">
+                <InfoBar
+                    Severity="Informational"
+                    Title="{Binding RequestId}"
+                    x:Uid="ApprovalText"
+                    IsClosable="False"
+                    IsOpen="True"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MaxHeight="80"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView
+            ItemsSource="{x:Bind chatViewModel.Messages}"
+            ItemTemplateSelector="{StaticResource ChatMessageTemplateSelector}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel
+                        ItemsUpdatingScrollMode="KeepLastItemInView"
+                        VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <ListView
+            Grid.Row="1"
+            ItemsSource="{x:Bind chatViewModel.Requests}"
+            ItemTemplate="{StaticResource RequestTemplate}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel
+                        ItemsUpdatingScrollMode="KeepLastItemInView"
+                        VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter
+                        Property="HorizontalContentAlignment"
+                        Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        
+        
     </Grid>
 </Page>

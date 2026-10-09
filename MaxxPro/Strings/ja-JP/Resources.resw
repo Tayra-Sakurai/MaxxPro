@@ -120,6 +120,9 @@
   <data name="AddButton.Label" xml:space="preserve">
     <value>追加</value>
   </data>
+  <data name="ApprovalText.Message" xml:space="preserve">
+    <value>エージェントはツールの使用を要求しています。</value>
+  </data>
   <data name="CategoriesPageItem.Content" xml:space="preserve">
     <value>分類</value>
   </data>

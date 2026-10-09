@@ -21,8 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="BasePage.xaml" />
+    <None Remove="Templates\ChatTemplateDictionary.xaml" />
     <None Remove="Templates\TreeViewTemplates.xaml" />
     <None Remove="Views\CategoriesView.xaml" />
+    <None Remove="Views\ChatPage.xaml" />
     <None Remove="Views\ItemsView.xaml" />
     <None Remove="Views\PlacesView.xaml" />
   </ItemGroup>
@@ -41,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="CommunityToolkit.VectorData.SqliteVec" Version="1.0.2-preview" />
+    <PackageReference Include="Microsoft.Agents.AI" Version="1.24.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12">
@@ -63,6 +67,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Caiman\Caiman.csproj" />
     <ProjectReference Include="..\Cougar\Cougar.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Templates\ChatTemplateDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ChatPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="BasePage.xaml">

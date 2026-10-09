@@ -1,11 +1,10 @@
 ﻿// SPDX-FileCopyrightText: 2026 Tayra Sakurai
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-using Caiman.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Cougar.Enums;
-using Cougar.Tools;
+using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Generic;
@@ -18,11 +17,13 @@ namespace Cougar.ViewModels
 {
     public partial class ChatViewModel : ObservableObject
     {
-        private readonly IChatClient client;
+        private readonly AIAgent agent;
 
-        public ChatViewModel(IChatClient client)
+        private AgentSession? session;
+
+        public ChatViewModel(AIAgent agent)
         {
-            this.client = client;
+            this.agent = agent;
             Messages = [];
             Prompt = string.Empty;
             Requests = [];
@@ -36,48 +37,74 @@ namespace Cougar.ViewModels
         public partial ObservableCollection<ToolApprovalRequestContent> Requests { get; set; }
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(SendMessageCommand))]
+        [NotifyCanExecuteChangedFor(nameof(SendTextMessageCommand))]
         public partial string Prompt { get; set; }
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(SendMessageCommand))]
+        [NotifyCanExecuteChangedFor(nameof(StartSessionCommand))]
         public partial ChatClientState State { get; set; }
 
-        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSendMessage))]
-        private async Task SendMessageAsync()
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanStartSession))]
+        private async Task StartSessionAsync()
         {
-            ChatMessage message = new(ChatRole.User, Prompt);
-            Messages.Add(message);
+            session = await agent.CreateSessionAsync();
+            State = ChatClientState.Healthy;
+            Messages.Clear();
+
+            SendTextMessageCommand.NotifyCanExecuteChanged();
+        }
+
+        private bool CanStartSession()
+        {
+            return State == ChatClientState.NotBegun;
+        }
+
+        /// <summary>
+        /// Sends the message to the agent and receives the response.
+        /// </summary>
+        /// <param name="message">The chat message to be sent.</param>
+        /// <returns>The task to control the asynchronous process.</returns>
+        private async Task ReceiveMessage(ChatMessage message)
+        {
+            if (session == null)
+                return;
+
             State = ChatClientState.Loading;
-            ChatResponse response = await client.GetResponseAsync(message);
-            Requests.Clear();
-            if (response.FinishReason == ChatFinishReason.ToolCalls)
-            {
-                State = ChatClientState.WaitingForApproval;
-                foreach (ChatMessage chatMessage in response.Messages)
-                    foreach (
-                        ToolApprovalRequestContent toolApprovalRequestContent in
-                        chatMessage.Contents
-                        .OfType<ToolApprovalRequestContent>())
-                        Requests.Add(toolApprovalRequestContent);
-            }
-            else if (response.FinishReason == ChatFinishReason.ContentFilter ||
-                response.FinishReason == ChatFinishReason.Length)
-                State = ChatClientState.Error;
-            else if (response.FinishReason == ChatFinishReason.Stop)
-            {
-                State = ChatClientState.Healthy;
-                Messages.Add(response.Messages[0]);
-            }
+            AgentResponse response = await agent.RunAsync(message, session);
+            if (response == null) return;
+
+            foreach (
+                ToolApprovalRequestContent requestContent in
+                response.Messages
+                .SelectMany(m => m.Contents)
+                .OfType<ToolApprovalRequestContent>())
+                Requests.Add(requestContent);
+
+            foreach (
+                ChatMessage chatMessage in
+                response.Messages
+                .Where(e => e.Contents.All(c => c is TextContent)))
+                Messages.Add(chatMessage);
         }
 
-        private bool CanSendMessage()
+        [RelayCommand(AllowConcurrentExecutions = false, CanExecute = nameof(CanSendTextMessage))]
+        private async Task SendTextMessageAsync()
         {
-            return !string.IsNullOrWhiteSpace(Prompt) &&
-                (State == ChatClientState.Healthy ||
-                State == ChatClientState.NotBegun);
+            if (string.IsNullOrWhiteSpace(Prompt) ||
+                session == null)
+                return;
+
+            ChatMessage chatMessage = new(ChatRole.User, Prompt);
+            Messages.Add(chatMessage);
+
+            Prompt = string.Empty;
+
+            await ReceiveMessage(chatMessage);
         }
 
-        
+        private bool CanSendTextMessage()
+        {
+            return !string.IsNullOrWhiteSpace(Prompt) && session != null;
+        }
     }
 }

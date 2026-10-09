@@ -5,11 +5,14 @@ using Caiman.Contexts;
 using Caiman.Models;
 using Caiman.ViewModels;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.VectorData.SqliteVec;
 using Cougar.Tools;
 using Cougar.ViewModels;
+using Microsoft.Agents.AI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.VectorData;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -82,32 +85,49 @@ namespace MaxxPro
             services.AddSingleton<IModelTool<Item>, CaimanModelTool<Item>>();
 
             services.AddChatClient(
+                new OllamaApiClient(
+                    new Uri("http://localhost:11434/api"),
+                    "gemma4:e2b"));
+            services.AddEmbeddingGenerator(
+                new OllamaApiClient(
+                    new Uri("http://localhost:11434/api"),
+                    "embeddinggemma:latest"));
+
+            services.AddSqliteVectorStore(
+                _ => $"Data Source={System.IO.Path.Join(ApplicationData.GetDefault().LocalFolder.Path, "chathistory.db")}");
+
+            services.AddSingleton(
                 sp =>
                 {
-                    IChatClient innerClient = new OllamaApiClient(
-                        new Uri("http://localhost:11434/api"),
-                        "gemma:e2b");
+                    VectorStore vectorStore = sp.GetRequiredService<SqliteVectorStore>();
 
-                    return new ChatClientBuilder(innerClient)
-                    .UseFunctionInvocation()
-                    .UseDistributedCache()
-                    .ConfigureOptions(
-                        options =>
+                    List<AITool> tools = sp.GetRequiredService<IModelTool<LargeCategory>>().GetAITools()
+                    .Concat(sp.GetRequiredService<IModelTool<MediumCategory>>().GetAITools())
+                    .Concat(sp.GetRequiredService<IModelTool<SmallCategory>>().GetAITools())
+                    .Concat(sp.GetRequiredService<IModelTool<Place>>().GetAITools())
+                    .Concat(sp.GetRequiredService<IModelTool<Item>>().GetAITools())
+                    .ToList();
+
+                    AIAgent agent = sp.GetRequiredService<IChatClient>()
+                    .AsAIAgent(
+                        new ChatClientAgentOptions
                         {
-                            options.Tools ??= new List<AITool>();
+                            ChatOptions = new()
+                            {
+                                Instructions = "You are the agent to manage the database.",
+                                Tools = tools,
+                            },
+                            Name = "Cougar",
+                            AIContextProviders = [new ChatHistoryMemoryProvider(
+                                vectorStore: vectorStore,
+                                collectionName: "chathistory",
+                                vectorDimensions: 768,
+                                session => new ChatHistoryMemoryProvider.State(
+                                    storageScope: new(){UserId = Environment.UserName, SessionId = Guid.NewGuid().ToString() },
+                                    searchScope: new() {UserId = Environment.UserName }))],
+                        });
 
-                            foreach (AITool tool in sp.GetRequiredService<IModelTool<LargeCategory>>().GetAITools())
-                                options.Tools.Add(tool);
-                            foreach (AITool tool1 in sp.GetRequiredService<IModelTool<MediumCategory>>().GetAITools())
-                                options.Tools.Add(tool1);
-                            foreach (AITool tool2 in sp.GetRequiredService<IModelTool<SmallCategory>>().GetAITools())
-                                options.Tools.Add(tool2);
-                            foreach (AITool tool3 in sp.GetRequiredService<IModelTool<Place>>().GetAITools())
-                                options.Tools.Add(tool3);
-                            foreach (AITool tool4 in sp.GetRequiredService<IModelTool<Item>>().GetAITools())
-                                options.Tools.Add(tool4);
-                        })
-                    .Build();
+                    return agent;
                 });
 
             services.AddTransient<ChatViewModel>();

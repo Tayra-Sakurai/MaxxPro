@@ -10,6 +10,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/Tayra-Sakurai/MaxxPro)](https://github.com/Tayra-Sakurai/MaxxPro/issues)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Tayra-Sakurai/MaxxPro)](https://github.com/Tayra-Sakurai/MaxxPro/commits/master)
 [![GitHub contributors](https://img.shields.io/github/contributors/Tayra-Sakurai/MaxxPro)](https://github.com/Tayra-Sakurai/MaxxPro/graphs/contributors)
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/Tayra-Sakurai/MaxxPro)](https://github.com/Tayra-Sakurai/MaxxPro)
 
 **A local-first, zero-cloud Windows desktop application for emergency and household stockpile management, powered by WinUI 3, .NET 10, and offline AI.**
 
@@ -155,8 +156,9 @@ To run the documentation site locally:
 
 ```bash
 cd docs
-npm install
-npm start
+npm ci
+npm run build
+npm run serve
 ```
 
 ---

@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+---
+
+# Building & Debugging
+
+Instructions for building MaxxPro from source code.
+
+---
+
+## Prerequisites
+
+- **OS**: Windows 11 (Build 26100 or later recommended)
+- **IDE**: Visual Studio 2026 with .NET Desktop and WinUI 3 workloads
+- **SDKs**: .NET 10.0 SDK and Windows 11 SDK (10.0.26100.0)
+
+---
+
+## Building via Command Line
+
+```powershell
+# Restore dependencies
+msbuild MaxxPro /t:Restore /p:Configuration=Release /p:TargetFramework=net10.0-windows10.0.26100.0
+
+# Build and generate MSIX package
+msbuild MaxxPro /p:Configuration=Release /p:Platform=x64 /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true /p:TargetFramework=net10.0-windows10.0.26100.0
+```

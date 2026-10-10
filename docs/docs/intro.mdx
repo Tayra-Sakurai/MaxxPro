@@ -1,47 +1,59 @@
 ---
 sidebar_position: 1
+slug: /intro
 ---
 
-# Tutorial Intro
+# MaxxPro へようこそ
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**MaxxPro** は、災害時や日常の備蓄品を効率的かつ安全に管理するための Windows 11 向けデスクトップアプリケーションです。
 
-## Getting Started
+最新の **WinUI 3 (Windows App SDK)** と **.NET 10** を基盤に開発されており、ローカル第一（Local-First）設計を徹底しています。外部のオンラインデータベースやクラウドサービスに一切依存せず、すべてのデータをお手元のPC内に完結して保存・処理します。
 
-Get started by **creating a new site**.
+さらに、**Ollama** を通じたローカルAIアシスタント「**Cougar**」を標準搭載。プライバシーを完全に守りながら、自然言語での備蓄確認や対話型の在庫登録・更新を行えます。
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+---
 
-### What you'll need
+## 主な特徴
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### 1. 完全ローカル・ゼロクラウド設計
+- インターネット接続がないオフライン環境や、災害による通信障害時でも100%すべての機能が動作します。
+- 備蓄データは端末内のローカル SQLite データベース（`Caiman.db`）に暗号化および安全に保存されます。
 
-## Generate a new site
+### 2. 体系的な3段階分類と保管場所管理
+- **大分類 > 中分類 > 小分類** の3階層によるカテゴリ構造で、食料品、飲料水、生活用品、医薬品などをすっきり整理。
+- **保管場所（Places）** ごとの在庫数把握や、賞味期限・消費期限（Expiring Date）のトラッキングが可能です。
 
-Generate a new Docusaurus site using the **classic template**.
+### 3. ローカルAIアシスタント「Cougar」
+- ローカルLLM（**Gemma 4**）およびローカル埋め込みモデル（**EmbeddingGemma**）と連携。
+- ベクトル検索エンジン（**sqlite-vec**）による会話履歴の永続化。
+- **ヒューマンインザループ（Human-in-the-Loop）** による安全設計：AIによるデータの追加・更新・削除は、ユーザーが画面上で明示的に「許可」した場合にのみ実行されます。
 
-The classic template will automatically be added to your project after you run the command:
+### 4. Windows 11 ネイティブの洗練されたUI
+- **Mica バックカラー**、Fluent Design System、ダークモード・ライトモードの自動切替に対応。
+- 日本語（ja-JP）および英語（en-US, en-GB）の多言語対応。
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+---
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## システム要件
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+| 項目 | 要件 |
+| :--- | :--- |
+| **OS** | Windows 11 (バージョン 22H2 以降推奨, 64-bit) |
+| **ランタイム** | .NET 10.0 ランタイム（自己完結型パッケージの場合は不要） |
+| **AI機能（任意）** | [Ollama](https://ollama.com/) がインストールされ、ローカルで稼働していること |
+| **推奨AIモデル** | `gemma4:e2b` (対話用), `embeddinggemma:latest` (埋め込み用) |
 
-## Start your site
+:::tip AI機能なしでも通常利用が可能
+Ollama がインストールされていない環境でも、手動での品目・保管場所・分類の登録・編集・管理機能はすべて問題なくご利用いただけます。
+:::
 
-Run the development server:
+---
 
-```bash
-cd my-website
-npm run start
-```
+## 次のステップ
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+MaxxPro の利用を開始するには、以下のガイドをご参照ください。
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- [**クイックスタートガイド**](./getting-started/quickstart) - インストールから初期設定、品目登録までの手順
+- [**品目管理ガイド**](./user-guide/items) - 備蓄品の登録・期限管理
+- [**ローカルAIアシスタント**](./user-guide/ai-assistant) - Cougar との対話・操作方法
+- [**システムアーキテクチャ**](./architecture/overview) - アプリの内部構造と開発仕様

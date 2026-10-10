@@ -1,0 +1,62 @@
+---
+sidebar_position: 4
+---
+
+# AI Assistant "Cougar"
+
+MaxxPro integrates **Cougar**, a fully local AI assistant powered by Ollama.
+
+---
+
+## Human-in-the-Loop Safety Guardrails
+
+Cougar can answer questions and perform actions like querying, creating, updating, or deleting database records.
+
+To prevent unintended modifications, all state-changing operations require explicit **Human-in-the-Loop** confirmation.
+
+```mermaid
+sequenceDiagram
+    actor User as User
+    participant UI as WinUI 3 (ChatPage)
+    participant Agent as Cougar (AIAgent)
+    participant Tool as CaimanModelTool
+    participant DB as SQLite (Caiman.db)
+
+    User->>UI: "Add 3 packs of ramen to the Pantry"
+    UI->>Agent: Prompt sent
+    Agent->>Tool: AddModelAsync(Item) requested
+    Tool-->>UI: ApprovalRequired triggered
+    UI-->>User: "The agent requests for your approval for using tools."
+    alt User Approves
+        User->>UI: Clicks "Approve"
+        UI->>Tool: Execution permitted
+        Tool->>DB: INSERT INTO Items ...
+        DB-->>Tool: OK
+        Tool-->>Agent: Result returned
+        Agent-->>UI: "Ramen has been added to the Pantry!"
+    else User Rejects
+        User->>UI: Skips / Ignores
+        Agent-->>UI: Action was cancelled
+    end
+```
+
+---
+
+## Example Queries
+
+### 1. Stockpile Status
+> **User**: *"What items are expiring before the end of the year?"*  
+> **Cougar**: *"Here are the items expiring before December 31:*  
+> - *Canned Tuna: Nov 15, 2026*  
+> - *Alpha Rice: Dec 01, 2026"*
+
+### 2. Database Modification
+> **User**: *"Add 1 box of emergency biscuits to the Go Bag under Emergency Food."*  
+> **Cougar**: *"I will register the item with these parameters. Please approve the tool execution."*  
+> *(Click **Approve** in the command bar to confirm)*
+
+---
+
+## Local Vector Memory
+
+Conversations are remembered across sessions using an offline vector database (`chathistory.db` with `sqlite-vec`). Your chat logs never leave your device.

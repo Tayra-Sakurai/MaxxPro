@@ -1,11 +1,57 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 3rem 0;
   width: 100%;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.featureCol {
+  margin-bottom: 2rem;
 }
+
+.featureCard {
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 1.5rem;
+  background: var(--ifm-card-background-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--ifm-color-primary);
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background-color: rgba(var(--ifm-color-primary-rgb), 0.12);
+  color: var(--ifm-color-primary);
+  margin-bottom: 1rem;
+}
+
+.featureIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.featureDescription {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0;
+}
+

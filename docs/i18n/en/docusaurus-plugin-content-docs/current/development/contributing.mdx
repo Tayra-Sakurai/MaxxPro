@@ -1,0 +1,27 @@
+---
+sidebar_position: 3
+---
+
+# Contributing Guidelines
+
+Guidelines for contributing to the MaxxPro codebase.
+
+---
+
+## Workflow
+
+1. Check existing GitHub Issues or open a new one.
+2. Create a topic branch from `master`.
+3. Follow the `.editorconfig` formatting rules.
+4. Add unit tests in `Buffalo` for any new or modified logic.
+5. Verify tests:
+   ```powershell
+   dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64
+   ```
+6. Submit a Pull Request.
+
+---
+
+## License
+
+MaxxPro is licensed under the **GNU General Public License v3.0 or later (GPL-3.0-or-later)**.

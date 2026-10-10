@@ -1,43 +1,42 @@
-# Website
+# MaxxPro Documentation & Homepage
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This directory contains the source code for the official documentation and homepage of **MaxxPro**, built using [Docusaurus](https://docusaurus.io/).
 
-## Installation
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) v20.0 or higher
+- npm
+
+## Setup & Installation
 
 ```bash
+cd docs
 npm install
 ```
 
-**Note**: feel free to use the package manager of your choice.
-
 ## Local Development
+
+Start the local development server with hot-reload:
 
 ```bash
 npm run start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+By default, the site will be available at `http://localhost:3000/MaxxPro/`.
 
 ## Build
+
+Generate the production static site for all configured locales (`ja-JP` and `en`):
 
 ```bash
 npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+The output will be placed in `build/` (for Japanese default) and `build/en/` (for English).
 
-## Deployment
-
-Using SSH:
+## Testing the Production Build Locally
 
 ```bash
-USE_SSH=true npm run deploy
+npm run serve
 ```
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> npm run deploy
-```
-
-If you are using GitHub Pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

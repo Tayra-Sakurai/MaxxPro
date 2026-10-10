@@ -1,0 +1,45 @@
+---
+sidebar_position: 1
+---
+
+# Item Management (Items)
+
+Learn how to browse, add, edit, delete, and monitor expiration dates for your stockpile items.
+
+---
+
+## Item Data Schema
+
+Each `Item` in MaxxPro contains:
+
+| Property | Description | Required | Example |
+| :--- | :--- | :---: | :--- |
+| **Identity (Id)** | Auto-generated unique record ID | Auto | `1`, `2` |
+| **Name** | Product name / Item title | Yes | `Long-term Storage Water 2L` |
+| **Description** | Notes, quantity details, allergy information | No | `Box of 6 bottles` |
+| **Expiring Date (Life)** | Best-by or expiration date | Yes | `2029-05-31` |
+| **Small Category** | Category assignment (linked to Medium & Large) | Yes | `Bottled Water` |
+| **Place** | Storage location | Yes | `Pantry Lower Shelf` |
+
+---
+
+## Operations
+
+### Adding a New Item
+1. Navigate to the **Items** page.
+2. Click **Add Item** in the command bar.
+3. Enter Name, Description, and Expiration Date.
+4. Select the Large Category, Medium Category, and Small Category from the dropdowns.
+5. Select the Storage Place, then click **Save**.
+
+### Editing an Item
+1. Select a row from the items table.
+2. Click **Edit** in the command bar.
+3. Modify the desired fields and click **Save**.
+
+### Deleting an Item
+1. Select the item from the table.
+2. Click **Delete** in the command bar.
+
+### Syncing Table Data
+Click **Sync** to refresh the data grid if updates were made outside the current view.

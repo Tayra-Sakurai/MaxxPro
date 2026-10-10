@@ -6,8 +6,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'MaxxPro',
-  tagline: 'Welcome to MaxxPro!',
-  favicon: 'img/favicon.ico',
+  tagline: '完全ローカルで安心の備蓄管理デスクトップアプリ',
+  favicon: 'img/logo.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -18,7 +18,7 @@ const config: Config = {
   url: 'https://tayra-sakurai.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/MaxxPro',
+  baseUrl: '/MaxxPro/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -33,6 +33,18 @@ const config: Config = {
   i18n: {
     defaultLocale: 'ja-JP',
     locales: ['ja-JP', 'en'],
+    localeConfigs: {
+      'ja-JP': {
+        label: '日本語',
+        direction: 'ltr',
+        htmlLang: 'ja-JP',
+      },
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+      },
+    },
   },
 
   presets: [
@@ -41,22 +53,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Tayra-Sakurai/MaxxPro/tree/master/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
-            xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Tayra-Sakurai/MaxxPro/tree/master/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -70,24 +72,24 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/logo.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
     navbar: {
       title: 'MaxxPro',
       logo: {
-        alt: 'My site icon',
-        src: 'img/logo.svg',
+        alt: 'MaxxPro Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'ドキュメント',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/blog', label: 'ブログ', position: 'left' },
         {
           type: 'localeDropdown',
           position: 'right',
@@ -103,35 +105,58 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'ドキュメント',
           items: [
             {
-              label: 'Introduction',
+              label: 'はじめに',
               to: '/docs/intro',
+            },
+            {
+              label: 'クイックスタート',
+              to: '/docs/getting-started/quickstart',
+            },
+            {
+              label: 'アーキテクチャ',
+              to: '/docs/architecture/overview',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'コミュニティ & リンク',
           items: [
             {
-              label: 'Blog',
+              label: 'ブログ',
               to: '/blog',
             },
             {
-              label: 'GitHub',
+              label: 'GitHub リポジトリ',
               href: 'https://github.com/Tayra-Sakurai/MaxxPro',
+            },
+            {
+              label: 'リリースページ',
+              href: 'https://github.com/Tayra-Sakurai/MaxxPro/releases',
+            },
+          ],
+        },
+        {
+          title: 'ライセンス',
+          items: [
+            {
+              label: 'GPL-3.0-or-later',
+              href: 'https://spdx.org/licenses/GPL-3.0-or-later.html',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Tayra Sakurai. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tayra Sakurai. Built with Docusaurus. Released under GPL-3.0-or-later.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['csharp', 'powershell', 'bash', 'json'],
     },
   } satisfies Preset.ThemeConfig,
 };
 
 export default config;
+

@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Current",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.クイックスタート": {
+    "message": "Quickstart",
+    "description": "The label for category 'クイックスタート' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.ユーザーガイド": {
+    "message": "User Guide",
+    "description": "The label for category 'ユーザーガイド' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.アーキテクチャ": {
+    "message": "Architecture",
+    "description": "The label for category 'アーキテクチャ' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.開発者ガイド": {
+    "message": "Developer Guide",
+    "description": "The label for category '開発者ガイド' in sidebar 'docsSidebar'"
+  }
+}

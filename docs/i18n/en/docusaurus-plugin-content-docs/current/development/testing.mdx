@@ -1,0 +1,26 @@
+---
+sidebar_position: 2
+---
+
+# Testing (Buffalo)
+
+The **Buffalo** project hosts all automated tests for the solution.
+
+---
+
+## Repository Testing Rules
+
+:::important Repository Rule (AGENTS.md)
+- Before opening a Pull Request, run `dotnet test Buffalo\Buffalo.csproj`.
+- Tests of `Caiman.csproj` and `Cougar.csproj` must be included in `Buffalo.csproj`.
+- All tests must be runnable via `dotnet test Buffalo\Buffalo.csproj`.
+- Adding any new projects to the solution is prohibited.
+:::
+
+---
+
+## Running the Test Suite
+
+```powershell
+dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64
+```

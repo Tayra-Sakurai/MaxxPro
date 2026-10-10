@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+---
+
+# Quickstart Guide
+
+This guide walks you through installing MaxxPro, entering initial stockpile data, and enabling the local AI assistant.
+
+---
+
+## Step 1: Download & Installation
+
+1. Download the latest `.msixbundle` or `.msix` package from the [MaxxPro Releases Page](https://github.com/Tayra-Sakurai/MaxxPro/releases).
+2. For sideloading, install the bundled certificate (`.cer`) into the "Trusted Root Certification Authorities" store.
+3. Open the installer and complete the setup.
+
+---
+
+## Step 2: Create Storage Places
+
+Before adding items, define the physical locations where stockpiles are stored.
+
+1. In the left navigation menu, click **Places**.
+2. Click **Add Item** on the command bar.
+3. Enter a place name (e.g., `Pantry`, `Go Bag (Front Door)`, `Garage Storage`, `Refrigerator`).
+4. Click **Save** to confirm.
+
+---
+
+## Step 3: Create Categories
+
+MaxxPro structures categories hierarchically: **Large Category > Medium Category > Small Category**. Items link directly to Small Categories.
+
+1. In the left menu, click **Categories**.
+2. Add a **Large Category** (e.g., `Emergency Food`, `Daily Necessities`, `First Aid`).
+3. Under the Large Category, add a **Medium Category** (e.g., `Pre-cooked & Retort`, `Bottled Water`).
+4. Under the Medium Category, add a **Small Category** (e.g., `Alpha Rice`, `Hard Biscuits`, `2L Water Bottles`).
+
+---
+
+## Step 4: Register Stockpile Items
+
+1. In the left menu, select **Items**.
+2. Click **Add Item**.
+3. Fill in the details:
+   - **Name**: `Mixed Rice Alpha Rice 100g`
+   - **Description**: `Spoon included; ready in 15 mins with boiling water or 60 mins with cold water`
+   - **Expiring Date**: Select the expiration date
+   - **Large / Medium / Small Category**: Choose from your category tree
+   - **Place**: Choose the storage location
+4. Click **Save**.
+
+---
+
+## Step 5: Enable Local AI Assistant "Cougar" (Optional)
+
+### 1. Install Ollama
+Download and install Ollama for Windows from the [official website](https://ollama.com/).
+
+### 2. Pull Required Models
+Open PowerShell and run:
+
+```powershell
+# Pull conversational model
+ollama pull gemma4:e2b
+
+# Pull embedding model for chat vector memory
+ollama pull embeddinggemma:latest
+```
+
+### 3. Start a Session in MaxxPro
+1. Select **Chat** from the left navigation pane.
+2. Click **New Session** at the top.
+3. Send a prompt such as: *"Which stockpile items are expiring this year?"* or *"List all items stored in the Pantry."*
+4. When Cougar requests to modify or insert records, an **Approval Request** banner will appear. Click **Approve** to execute the database operation safely.

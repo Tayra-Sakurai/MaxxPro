@@ -1,0 +1,46 @@
+---
+sidebar_position: 1
+---
+
+# ビルドと実行
+
+MaxxPro をソースコードからビルド・デバッグするための手順です。
+
+---
+
+## 前提要件
+
+- **OS**: Windows 11 (ビルド 26100 以降推奨)
+- **IDE**: Visual Studio 2026 (または最新版)
+  - 「.NET デスクトップ開発」ワークロード
+  - 「Windows アプリケーション開発 (WinUI 3 / Windows App SDK)」
+- **.NET SDK**: .NET 10.0 SDK
+- **Windows SDK**: Windows 11 SDK (10.0.26100.0)
+
+---
+
+## ソースコードの取得
+
+```powershell
+git clone https://github.com/Tayra-Sakurai/MaxxPro.git
+cd MaxxPro
+```
+
+---
+
+## ソリューションのビルド
+
+### Visual Studio を使用する場合
+1. `MaxxPro.slnx` を Visual Studio で開きます。
+2. ソリューション構成を `Debug` または `Release`、プラットフォームを `x64`（または `ARM64`）に設定します。
+3. スタートアッププロジェクトを `MaxxPro` に設定し、`F5` キーで実行します。
+
+### CLI / MSBuild を使用する場合
+
+```powershell
+# パッケージの復元
+msbuild MaxxPro /t:Restore /p:Configuration=Release /p:TargetFramework=net10.0-windows10.0.26100.0
+
+# アプリケーションのビルドとパッケージ生成
+msbuild MaxxPro /p:Configuration=Release /p:Platform=x64 /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true /p:TargetFramework=net10.0-windows10.0.26100.0
+```

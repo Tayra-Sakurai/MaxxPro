@@ -1,19 +1,15 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+release:
+  label: リリース
+  permalink: /release
+  description: MaxxPro のリリース情報
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+local-first:
+  label: ローカル第一
+  permalink: /local-first
+  description: 完全オフライン・ローカル第一設計に関する記事
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+local-ai:
+  label: ローカルAI
+  permalink: /local-ai
+  description: Ollama やオンデバイスAIに関する記事
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description

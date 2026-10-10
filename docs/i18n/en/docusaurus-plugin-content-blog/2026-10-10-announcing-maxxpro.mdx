@@ -1,0 +1,43 @@
+---
+slug: announcing-maxxpro
+title: "Announcing MaxxPro 1.0: Local-First Stockpile Management for Windows"
+authors: [tayra]
+tags: [release, local-first, local-ai]
+---
+
+We are excited to announce the release of **MaxxPro 1.0**, a local-first stockpile management desktop application designed for Windows 11!
+
+MaxxPro was created to make emergency preparedness and daily household inventory tracking reliable, private, and effortless. Adhering to a strict **Local-First** architecture, MaxxPro stores all records on your local machine with zero dependency on online databases or cloud services.
+
+{/* truncate */}
+
+## Motivation: Why Local-First?
+
+During natural disasters (earthquakes, storms, power blackouts), network connections often fail. Your emergency supply checklist must be accessible at all times, without relying on external cloud infrastructure.
+
+Additionally, household stockpiles, medical supplies, and storage spots are deeply personal data. With MaxxPro, your inventory remains private and completely under your control.
+
+---
+
+## Key Highlights
+
+### 1. 100% Local-First & Zero-Cloud
+MaxxPro uses Entity Framework Core 10 and SQLite (`Caiman.db`). All features operate flawlessly without an active internet connection.
+
+### 2. 3-Tier Category Tree & Storage Places
+- Organize items with **Large > Medium > Small** categories.
+- Monitor storage locations (pantry, go bag, garage, vehicle) and track expiration dates with ease.
+
+### 3. Local AI Assistant "Cougar"
+Integrated with **Ollama** (`gemma4:e2b` / `embeddinggemma`) and `sqlite-vec`, Cougar allows you to query your inventory with natural language. Safety is guaranteed by **Human-in-the-Loop tool approvals** for all database modifications.
+
+### 4. Modern Windows 11 Fluent Design
+Built on WinUI 3 and Windows App SDK 1.7 with Mica material backdrop, dark/light theme support, and full bilingual localization.
+
+---
+
+## Getting Started
+
+Download the latest release package from the [GitHub Releases Page](https://github.com/Tayra-Sakurai/MaxxPro/releases).
+
+Check out the [Documentation](/docs/intro) and [Quickstart Guide](/docs/getting-started/quickstart) to get started!

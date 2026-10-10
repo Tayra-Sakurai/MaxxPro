@@ -1,0 +1,59 @@
+---
+sidebar_position: 1
+slug: /intro
+---
+
+# Welcome to MaxxPro
+
+**MaxxPro** is a Windows 11 desktop application designed for efficient and reliable stockpile management during emergencies and daily life.
+
+Built on **WinUI 3 (Windows App SDK)** and **.NET 10**, MaxxPro adheres strictly to a **Local-First** philosophy. It requires no online database or cloud connectivity, processing and storing all data entirely on your local machine.
+
+Furthermore, MaxxPro features **Cougar**, a built-in local AI assistant powered by **Ollama**. Cougar provides natural-language stockpile queries and conversational data operations with complete privacy.
+
+---
+
+## Key Features
+
+### 1. 100% Local-First & Zero-Cloud
+- Works completely offline, even during power cuts or network outages following natural disasters.
+- Stockpile data is securely stored locally in an SQLite database (`Caiman.db`).
+
+### 2. 3-Tier Category & Storage Place Organization
+- **Large > Medium > Small** category structure to cleanly organize food supplies, drinking water, daily essentials, and medical supplies.
+- Track storage spots (**Places**) and monitor item counts and expiration dates (**Expiring Date**).
+
+### 3. Local AI Assistant "Cougar"
+- Seamlessly connects with local LLMs (**Gemma 4**) and local embeddings (**EmbeddingGemma**).
+- Local conversational memory via vector database (**sqlite-vec**).
+- **Human-in-the-Loop Safety**: Adding, updating, or deleting data requires your explicit approval on-screen before any changes are written to the database.
+
+### 4. Windows 11 Native UI Experience
+- Modern design featuring **Mica backdrop**, Fluent Design System, and automatic light/dark mode adaptation.
+- Full localization for Japanese (`ja-JP`) and English (`en-US`, `en-GB`).
+
+---
+
+## System Requirements
+
+| Item | Requirement |
+| :--- | :--- |
+| **Operating System** | Windows 11 (Version 22H2 or later recommended, 64-bit) |
+| **Runtime** | .NET 10.0 Runtime (Included in self-contained packages) |
+| **Local AI (Optional)** | [Ollama](https://ollama.com/) running locally |
+| **Recommended Models** | `gemma4:e2b` (Chat), `embeddinggemma:latest` (Embeddings) |
+
+:::tip Usable without AI
+All standard features (Items, Places, Categories, and Expiration tracking) are fully functional even if Ollama is not installed.
+:::
+
+---
+
+## Next Steps
+
+Explore the guides below to get started with MaxxPro:
+
+- [**Quickstart Guide**](./getting-started/quickstart) - Installation, initial setup, and adding items
+- [**Item Management**](./user-guide/items) - Managing stockpile items and expiration dates
+- [**Local AI Assistant**](./user-guide/ai-assistant) - Interacting with Cougar and tool approvals
+- [**System Architecture**](./architecture/overview) - Solution structure and technical design

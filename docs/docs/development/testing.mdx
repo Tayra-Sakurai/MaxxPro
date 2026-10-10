@@ -1,0 +1,48 @@
+---
+sidebar_position: 2
+---
+
+# テストガイド (Buffalo)
+
+MaxxPro の品質を担保するため、ソリューションには **Buffalo** テストプロジェクトが用意されています。
+
+---
+
+## リポジトリのテスト運用ルール
+
+:::important リポジトリ要件 (AGENTS.md より)
+- プルリクエスト（PR）を作成する前に、必ず `dotnet test Buffalo\Buffalo.csproj` を実行して全テストが成功することを確認してください。
+- `Caiman.csproj` および `Cougar.csproj` のテストはすべて `Buffalo.csproj` 内に含める必要があります。
+- すべてのテストは `dotnet test Buffalo\Buffalo.csproj` で実行可能でなければなりません。
+- **ソリューションへの新たなプロジェクトの追加は禁止されています。**
+:::
+
+---
+
+## テストの実行方法
+
+Buffalo は x64 プラットフォーム向けに構成されているため、以下の引数を指定して実行します：
+
+```powershell
+dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64
+```
+
+### 実行例の出力
+
+```
+復元対象のプロジェクトを決定しています...
+Caiman -> ...\bin\x64\Debug\net10.0-windows10.0.26100.0\Caiman.dll
+Cougar -> ...\bin\x64\Debug\net10.0-windows10.0.26100.0\Cougar.dll
+Buffalo -> ...\bin\x64\Debug\net10.0-windows10.0.26100.0\win-x64\Buffalo.dll
+テスト実行に成功しました。
+```
+
+---
+
+## テストの構成
+
+- **`Buffalo/ViewModels/Caiman/TestCategoriesViewModel.cs`**:
+  - カテゴリ一覧、追加、子要素へのナビゲーションとデータバインディングのテスト。
+  - `FakeCaimanContextBuilder` を使用したインメモリ検証。
+- **`Buffalo/ViewModels/Cougar/TestChatViewModel.cs`**:
+  - AIチャットセッションの開始、状態遷移（`NotBegun` -> `Healthy`）、メッセージ送受信のテスト。

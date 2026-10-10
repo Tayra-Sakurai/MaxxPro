@@ -1,0 +1,46 @@
+---
+sidebar_position: 2
+---
+
+# Category Management (Categories)
+
+MaxxPro organizes inventory with a structured **3-level hierarchy (Large > Medium > Small)**.
+
+---
+
+## Hierarchy Overview
+
+```mermaid
+graph TD
+    Large["Large Category<br/>e.g. Emergency Food"]
+    Medium1["Medium Category<br/>e.g. Staples & Rice"]
+    Medium2["Medium Category<br/>e.g. Canned & Sides"]
+    Small1["Small Category<br/>e.g. Alpha Rice"]
+    Small2["Small Category<br/>e.g. Canned Tuna"]
+    Item1["Item<br/>Seaweed Rice 100g"]
+    Item2["Item<br/>Tuna Flakes in Oil"]
+
+    Large --> Medium1
+    Large --> Medium2
+    Medium1 --> Small1
+    Medium2 --> Small2
+    Small1 --> Item1
+    Small2 --> Item2
+```
+
+- **Large Category**: High-level grouping (e.g., Food & Drink, Daily Goods, Medical, Power & Fuel).
+- **Medium Category**: Subgroup under a Large Category (e.g., Canned Goods, Dry Food, Batteries).
+- **Small Category**: Granular group. **Items link directly to Small Categories.**
+
+---
+
+## Best Practices
+
+| Large Category | Medium Category | Small Category | Example Items |
+| :--- | :--- | :--- | :--- |
+| **Food & Water** | Drinking Water | 2L Bottles / 500ml Bottles | 5-Year Preserved Water 2L |
+| | Staples | Alpha Rice / Biscuits | Onisi White Rice, Hardtack |
+| | Canned & Sides | Fish & Meat / Soups | Canned Mackerel, Vegetable Soup |
+| **Sanitation & Hygiene** | Toilet Essentials | Emergency Toilets / Wet Wipes | Coagulant Portable Toilet Kit |
+| | Daily Supplies | Gas Canisters / Lighters / Plastic Wrap | Cassette Gas Cartridges |
+| **Medical & First Aid** | First Aid | First Aid Kit / Bandages | Antiseptic, Sterile Gauze, Pain Relievers |

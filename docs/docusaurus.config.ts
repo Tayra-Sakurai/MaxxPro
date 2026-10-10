@@ -53,6 +53,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          editUrl: 'https://github.com/Tayra-Sakurai/MaxxPro/edit/master/docs/',
         },
         blog: {
           showReadingTime: true,

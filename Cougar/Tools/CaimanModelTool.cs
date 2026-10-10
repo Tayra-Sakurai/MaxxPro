@@ -60,18 +60,38 @@ namespace Cougar.Tools
         {
             IList<AITool> aiTools = new List<AITool>();
 
-            AIFunction getFunc = AIFunctionFactory.Create(GetAll);
+            AIFunction getFunc = AIFunctionFactory.Create(
+                GetAll,
+                new AIFunctionFactoryOptions
+                {
+                    Name = nameof(GetAll) + typeof(TModel).Name,
+                });
             aiTools.Add(getFunc);
 
-            AIFunction addFuncWithoutApproval = AIFunctionFactory.Create(AddModelAsync);
+            AIFunction addFuncWithoutApproval = AIFunctionFactory.Create(
+                AddModelAsync,
+                new AIFunctionFactoryOptions
+                {
+                    Name = nameof(AddModelAsync) + typeof(TModel).Name,
+                });
             AIFunction addFunc = new ApprovalRequiredAIFunction(addFuncWithoutApproval);
             aiTools.Add(addFunc);
 
-            AIFunction removeFuncWithoutApproval = AIFunctionFactory.Create(RemoveModelAsync);
+            AIFunction removeFuncWithoutApproval = AIFunctionFactory.Create(
+                RemoveModelAsync,
+                new AIFunctionFactoryOptions
+                {
+                    Name = $"{nameof(RemoveModelAsync)}{typeof(TModel).Name}"
+                });
             AIFunction removeFunc = new ApprovalRequiredAIFunction(removeFuncWithoutApproval);
             aiTools.Add(removeFunc);
 
-            AIFunction updateFuncWithoutApproval = AIFunctionFactory.Create(UpdateModelAsync);
+            AIFunction updateFuncWithoutApproval = AIFunctionFactory.Create(
+                UpdateModelAsync,
+                new AIFunctionFactoryOptions
+                {
+                    Name = nameof(UpdateModelAsync) + typeof(TModel).Name,
+                });
             AIFunction updateFunc = new ApprovalRequiredAIFunction(updateFuncWithoutApproval);
             aiTools.Add(updateFunc);
 

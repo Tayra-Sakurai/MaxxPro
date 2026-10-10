@@ -32,12 +32,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local2:MarkdownBlock">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <WebView2 Name="View"/>
-                    </Border>
+                    <Grid>
+                        <RichEditBox
+                            IsReadOnly="True"
+                            TextWrapping="Wrap"
+                            Name="View"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

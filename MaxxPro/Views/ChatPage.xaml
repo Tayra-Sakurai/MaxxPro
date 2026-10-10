@@ -28,6 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" MaxHeight="80"/>
+            <RowDefinition Height="Auto" MaxHeight="76"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -51,6 +52,7 @@
         </ListView>
 
         <ListView
+            x:Name="Requests"
             Grid.Row="1"
             ItemsSource="{x:Bind chatViewModel.Requests}"
             ItemTemplate="{StaticResource RequestTemplate}">
@@ -71,7 +73,29 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        
-        
+
+        <TextBox
+            x:Uid="PromptBox"
+            Text="{x:Bind chatViewModel.Prompt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Row="2"/>
+
+        <CommandBar
+            DefaultLabelPosition="Bottom"
+            Grid.Row="3">
+            <AppBarButton
+                Icon="Message"
+                x:Uid="StartSessionButton"
+                Command="{x:Bind chatViewModel.StartSessionCommand}"/>
+            <AppBarSeparator/>
+            <AppBarButton
+                Icon="Send"
+                x:Uid="SendButton"
+                Command="{x:Bind chatViewModel.SendTextMessageCommand}"/>
+            <AppBarButton
+                Icon="Accept"
+                x:Uid="ApproveButton"
+                Command="{x:Bind chatViewModel.ApproveRequestCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=Requests}"/>
+        </CommandBar>
     </Grid>
 </Page>

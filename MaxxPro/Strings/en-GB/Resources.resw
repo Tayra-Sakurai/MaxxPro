@@ -123,8 +123,14 @@
   <data name="ApprovalText.Message" xml:space="preserve">
     <value>The agent requests for your approval for the use of tools.</value>
   </data>
+  <data name="ApproveButton.Label" xml:space="preserve">
+    <value>Approve</value>
+  </data>
   <data name="CategoriesPageItem.Content" xml:space="preserve">
     <value>Categories</value>
+  </data>
+  <data name="ChatItem.Content" xml:space="preserve">
+    <value>Chat</value>
   </data>
   <data name="CountColumn.Header" xml:space="preserve">
     <value>Number of Items</value>
@@ -174,8 +180,17 @@
   <data name="PlacesPageItem.Content" xml:space="preserve">
     <value>Places</value>
   </data>
+  <data name="PromptBox.Header" xml:space="preserve">
+    <value>Prompt</value>
+  </data>
+  <data name="PromptBox.PlaceholderText" xml:space="preserve">
+    <value>Please tell AI about what to do.</value>
+  </data>
   <data name="SaveButton.Label" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SendButton.Label" xml:space="preserve">
+    <value>Send</value>
   </data>
   <data name="SmallCategoryColumn.Header" xml:space="preserve">
     <value>Small Category</value>
@@ -186,11 +201,17 @@
   <data name="SourceTypeCategories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="SourceTypeChat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
   <data name="SourceTypeItems" xml:space="preserve">
     <value>Items</value>
   </data>
   <data name="SourceTypePlaces" xml:space="preserve">
     <value>Storages</value>
+  </data>
+  <data name="StartSessionButton.Label" xml:space="preserve">
+    <value>New Session</value>
   </data>
   <data name="SyncButton.Label" xml:space="preserve">
     <value>Sync</value>

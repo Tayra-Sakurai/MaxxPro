@@ -82,7 +82,7 @@
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
     <PublishTrimmed>False</PublishTrimmed>
     <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
-    <Version>0.0.1-alpha.2</Version>
+    <Version>0.0.1-alpha.3</Version>
     <Authors>Tayra Sakurai</Authors>
     <Description>Test project for MaxxPro</Description>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>

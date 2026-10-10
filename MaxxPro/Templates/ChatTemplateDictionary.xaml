@@ -12,7 +12,7 @@
         x:DataType="aiext:ChatMessage">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="40"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border
@@ -27,7 +27,30 @@
     <DataTemplate
         x:Key="ModelResponse"
         x:DataType="aiext:ChatMessage">
-        <te:MarkdownBlock Text="{Binding Text}"/>
+        <Grid Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Width="40"
+                Source="/Assets/OllamaLogos/ollama.png"/>
+            <TextBlock
+                Grid.Column="1"
+                HorizontalTextAlignment="Left"
+                Style="{StaticResource BodyLargeStrongTextBlockStyle}">
+                Ollama
+            </TextBlock>
+            <te:MarkdownBlock
+                Text="{Binding Text}"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"/>
+        </Grid>
     </DataTemplate>
 
     <local:ChatTemplateSelector

@@ -66,6 +66,12 @@ namespace MaxxPro
                 MainNavigation.Header = resourceLoader.GetString("SourceTypeItems");
                 return;
             }
+
+            if (e.SourcePageType == typeof(Views.ChatPage))
+            {
+                MainNavigation.Header = resourceLoader.GetString("SourceTypeChat");
+                return;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -91,7 +97,7 @@ namespace MaxxPro
             if (tag == null)
             {
                 Debug.WriteLine($"{args.SelectedItem}");
-                MainFrame.Navigate(typeof(Views.CategoriesView));
+                MainFrame.Navigate(typeof(Views.ChatPage));
                 return;
             }
 
@@ -100,7 +106,8 @@ namespace MaxxPro
                 "Items" => typeof(Views.ItemsView),
                 "Places" => typeof(Views.PlacesView),
                 "Categories" => typeof(Views.CategoriesView),
-                _ => typeof(Views.CategoriesView),
+                "Chat" => typeof(Views.ChatPage),
+                _ => typeof(Views.ChatPage),
             };
 
             MainFrame.Navigate(pageType);

@@ -85,7 +85,7 @@ namespace Cougar.ViewModels
             foreach (
                 ChatMessage chatMessage in
                 response.Messages
-                .Where(e => e.Contents.All(c => c is TextContent)))
+                .Where(e => e.Contents.Any(c => c is TextContent)))
                 Messages.Add(chatMessage);
 
             State = ChatClientState.Healthy;

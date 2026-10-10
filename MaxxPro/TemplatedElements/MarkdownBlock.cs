@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Tayra Sakurai
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-using Markdig;
+using DocSharp.Markdown;
+using DocSharp.Primitives;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
@@ -13,39 +14,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace MaxxPro.TemplatedElements
 {
-    [TemplatePart(Name = "View", Type = typeof(WebView2))]
+    [TemplatePart(Name = "View", Type = typeof(RichEditBox))]
     [ContentProperty(Name = nameof(Text))]
     public sealed partial class MarkdownBlock : Control
     {
-        private WebView2? webView2;
+        private RichEditBox? view2;
 
         public MarkdownBlock()
         {
             DefaultStyleKey = typeof(MarkdownBlock);
         }
 
-        protected override void OnApplyTemplate()
+        protected override async void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            webView2 = (WebView2)GetTemplateChild("View");
+            view2 = (RichEditBox)GetTemplateChild("View");
             DisplayData();
         }
 
         private void DisplayData()
         {
-            if (webView2 == null ||
+            if (view2 is null ||
                 string.IsNullOrWhiteSpace(Text))
                 return;
 
-            string html = Markdown.ToHtml(Text);
-            webView2.NavigateToString(html);
+            MarkdownSource markdownSource = MarkdownSource.FromMarkdownString(Text);
+            MarkdownConverter converter = new()
+            {
+                PageSize = PageSize.A5_Landscape,
+                PageMargins = PageMargins.Narrow,
+            };
+
+            string rtfString = converter.ToRtfString(markdownSource);
+            view2.IsReadOnly = false;
+            view2.Document.SetText(Microsoft.UI.Text.TextSetOptions.FormatRtf, rtfString);
+            view2.IsReadOnly = true;
         }
 
         public string Text

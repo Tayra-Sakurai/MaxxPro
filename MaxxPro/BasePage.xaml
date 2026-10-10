@@ -18,7 +18,6 @@
                     x:Uid="ViewsItem">
                     <NavigationViewItem.MenuItems>
                         <NavigationViewItem
-                            IsSelected="True"
                             Icon="Folder"
                             Tag="Categories"
                             x:Uid="CategoriesPageItem"/>
@@ -31,6 +30,14 @@
                             Tag="Items"
                             x:Uid="ItemsPageItem"/>
                     </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    x:Uid="ChatItem"
+                    IsSelected="True"
+                    Tag="Chat">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8F2;"/>
+                    </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 

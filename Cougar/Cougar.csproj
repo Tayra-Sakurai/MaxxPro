@@ -8,7 +8,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
-    <Version>0.0.1-alpha.2</Version>
+    <Version>0.0.1-alpha.3</Version>
     <Authors>Tayra Sakurai</Authors>
     <Description>Ollama tools package for Caiman.</Description>
     <Copyright>Copyright (C) 2026 Tayra Sakurai</Copyright>
@@ -19,6 +19,7 @@
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <NeutralLanguage>ja-JP</NeutralLanguage>
+    <Title>Cougar</Title>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\README.md">

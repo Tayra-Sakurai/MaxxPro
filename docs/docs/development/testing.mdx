@@ -21,10 +21,16 @@ MaxxPro の品質を担保するため、ソリューションには **Buffalo**
 
 ## テストの実行方法
 
-Buffalo は x64 プラットフォーム向けに構成されているため、以下の引数を指定して実行します：
+Pull Request 前の必須確認として、リポジトリルートで次のコマンドを実行します。
 
 ```powershell
-dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64
+dotnet test Buffalo\Buffalo.csproj
+```
+
+ローカル環境でプラットフォームを明示したい場合は、次のように `x64` と `Debug` を指定できます。
+
+```powershell
+dotnet test Buffalo\Buffalo.csproj -a x64 -c Debug -p:Platform=x64
 ```
 
 ### 実行例の出力
@@ -46,3 +52,9 @@ Buffalo -> ...\bin\x64\Debug\net10.0-windows10.0.26100.0\win-x64\Buffalo.dll
   - `FakeCaimanContextBuilder` を使用したインメモリ検証。
 - **`Buffalo/ViewModels/Cougar/TestChatViewModel.cs`**:
   - AIチャットセッションの開始、状態遷移（`NotBegun` -> `Healthy`）、メッセージ送受信のテスト。
+
+## テスト追加時の注意
+
+- `Caiman` と `Cougar` のテストは、必ず `Buffalo` プロジェクトに追加してください。
+- 新しい `.csproj` をソリューションへ追加しないでください。
+- ローカルDBに依存するテストでは、既存の `FakeCaimanContextFactory` や `FakeCaimanContextBuilder` を優先して使います。

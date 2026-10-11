@@ -11,13 +11,13 @@ MaxxPro プロジェクトへの貢献に関心をお寄せいただきありが
 ## 開発フロー
 
 1. **Issue の確認・作成**: 新機能の提案や不具合の報告は、まず GitHub Issues にて提起してください。
-2. **ブランチの作成**: `master` から作業ブランチを作成します（例: `feature/item-filter`, `fix/db-timeout`）。
+2. **ブランチの作成**: `master` から作業ブランチを作成します。AI 支援の作業では `docs/codex/update-documentation` のように、`[type-prefix]/[ai-agent-name]/[pull-request-title]` 形式を使います。
 3. **コーディング**:
    - `.editorconfig` のスタイル規則に従ってください。
    - 新しい機能を追加した場合は、必ず `Buffalo` プロジェクトに対応するテストを追加してください。
 4. **テストの実行**:
    ```powershell
-   dotnet test Buffalo/Buffalo.csproj -a x64 -c Debug -p:Platform=x64
+   dotnet test Buffalo\Buffalo.csproj
    ```
 5. **プルリクエストの作成**: テストが全て通過していることを確認し、PRを作成します。
 
@@ -27,6 +27,8 @@ MaxxPro プロジェクトへの貢献に関心をお寄せいただきありが
 
 - **新規プロジェクト追加の禁止**: アーキテクチャの簡潔性を保つため、ソリューションに新たな `.csproj` を追加することは認められていません。必要なコードは既存の `MaxxPro`, `Caiman`, `Cougar`, `Buffalo` に配置してください。
 - **完全ローカル動作の維持**: オンラインデータベースや外部クラウドAPIへの通信処理を追加しないでください。
+- **ドキュメント更新**: アプリケーション機能を変更した場合は、`README.md` と `docs/docs` の該当ページを合わせて更新してください。
+- **Windows 互換性**: このアプリは Windows 向けのため、既存ファイルの改行コードやプロジェクト構成を不用意に変更しないでください。
 
 ---
 

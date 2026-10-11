@@ -10,7 +10,7 @@ MaxxPro をソースコードからビルド・デバッグするための手順
 
 ## 前提要件
 
-- **OS**: Windows 11 (ビルド 26100 以降推奨)
+- **OS**: Windows 11 (ビルド 22000 以降、ビルド 26100 以降推奨)
 - **IDE**: Visual Studio 2026 (または最新版)
   - 「.NET デスクトップ開発」ワークロード
   - 「Windows アプリケーション開発 (WinUI 3 / Windows App SDK)」
@@ -44,3 +44,7 @@ msbuild MaxxPro /t:Restore /p:Configuration=Release /p:TargetFramework=net10.0-w
 # アプリケーションのビルドとパッケージ生成
 msbuild MaxxPro /p:Configuration=Release /p:Platform=x64 /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxBundle=Always /p:GenerateAppxPackageOnBuild=true /p:TargetFramework=net10.0-windows10.0.26100.0
 ```
+
+:::tip
+AI 機能の動作確認まで行う場合は、Ollama を起動し、設定画面で指定しているチャットモデルと埋め込みモデルを事前に取得してください。通常の画面遷移や備蓄管理のデバッグには Ollama は不要です。
+:::

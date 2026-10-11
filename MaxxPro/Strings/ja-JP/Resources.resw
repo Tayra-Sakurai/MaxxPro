@@ -144,6 +144,9 @@
   <data name="EditButton.Label" xml:space="preserve">
     <value>編集</value>
   </data>
+  <data name="EmbeddingSet.Header" xml:space="preserve">
+    <value>埋め込みモデル</value>
+  </data>
   <data name="IdColumn.Header" xml:space="preserve">
     <value>ID</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="MediumCategorySelect.Header" xml:space="preserve">
     <value>中分類</value>
   </data>
+  <data name="ModelSet.Header" xml:space="preserve">
+    <value>チャットモデル</value>
+  </data>
   <data name="NameBox.Header" xml:space="preserve">
     <value>名称</value>
   </data>
@@ -179,6 +185,9 @@
   </data>
   <data name="PlacesPageItem.Content" xml:space="preserve">
     <value>保管場所</value>
+  </data>
+  <data name="PortSet.Header" xml:space="preserve">
+    <value>Ollama接続ポート</value>
   </data>
   <data name="PromptBox.Header" xml:space="preserve">
     <value>メッセージ</value>
@@ -209,6 +218,9 @@
   </data>
   <data name="SourceTypePlaces" xml:space="preserve">
     <value>保管場所</value>
+  </data>
+  <data name="SourceTypeSettings" xml:space="preserve">
+    <value>設定</value>
   </data>
   <data name="StartSessionButton.Label" xml:space="preserve">
     <value>セッション開始</value>

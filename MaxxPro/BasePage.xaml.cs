@@ -72,6 +72,12 @@ namespace MaxxPro
                 MainNavigation.Header = resourceLoader.GetString("SourceTypeChat");
                 return;
             }
+
+            if (e.SourcePageType == typeof(Views.SettingsPage))
+            {
+                MainNavigation.Header = resourceLoader.GetString("SourceTypeSettings");
+                return;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -84,6 +90,12 @@ namespace MaxxPro
 
         private void MainNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            if (args.SelectedItem == sender.SettingsItem)
+            {
+                MainFrame.Navigate(typeof(Views.SettingsPage));
+                return;
+            }
+
             NavigationViewItem? selectedItem = args.SelectedItem as NavigationViewItem;
 
             if (selectedItem == null)

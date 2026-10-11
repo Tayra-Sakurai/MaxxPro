@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MaxxPro.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MaxxPro.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Spacing="4"
+        Orientation="Vertical">
+        <controls:SettingsCard
+            HeaderIcon="{ui:FontIcon Glyph=&#xE774;}"
+            x:Uid="PortSet">
+            <NumberBox
+                Value="{x:Bind viewModel.OllamaPort, Mode=TwoWay}"
+                SmallChange="1"
+                Minimum="1024"
+                Maximum="65535"/>
+        </controls:SettingsCard>
+        <controls:SettingsCard
+            HeaderIcon="{ui:FontIcon Glyph=&#xE90A;}"
+            x:Uid="ModelSet">
+            <TextBox
+                Text="{x:Bind viewModel.ModelName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+        </controls:SettingsCard>
+        <controls:SettingsCard
+            HeaderIcon="{ui:FontIcon Glyph=&#xE83B;}"
+            x:Uid="EmbeddingSet">
+            <TextBox
+                Text="{x:Bind viewModel.EmbeddingModelName, Mode=TwoWay}"/>
+        </controls:SettingsCard>
+    </StackPanel>
+</Page>

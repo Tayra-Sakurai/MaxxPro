@@ -27,6 +27,7 @@
     <None Remove="Views\ChatPage.xaml" />
     <None Remove="Views\ItemsView.xaml" />
     <None Remove="Views\PlacesView.xaml" />
+    <None Remove="Views\SettingsPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="CommunityToolkit.VectorData.SqliteVec" Version="1.0.2-preview" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.251219" />
     <PackageReference Include="DocSharp.Markdown" Version="0.21.0" />
     <PackageReference Include="Markdig" Version="1.4.0" />
     <PackageReference Include="Microsoft.Agents.AI" Version="1.24.0" />
@@ -69,6 +71,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Caiman\Caiman.csproj" />
     <ProjectReference Include="..\Cougar\Cougar.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Templates\ChatTemplateDictionary.xaml">

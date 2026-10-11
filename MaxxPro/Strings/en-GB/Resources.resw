@@ -144,6 +144,9 @@
   <data name="EditButton.Label" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EmbeddingSet.Header" xml:space="preserve">
+    <value>Embedding model</value>
+  </data>
   <data name="IdColumn.Header" xml:space="preserve">
     <value>Identity</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="MediumCategorySelect.Header" xml:space="preserve">
     <value>Medium Category</value>
   </data>
+  <data name="ModelSet.Header" xml:space="preserve">
+    <value>Chat model</value>
+  </data>
   <data name="NameBox.Header" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -179,6 +185,9 @@
   </data>
   <data name="PlacesPageItem.Content" xml:space="preserve">
     <value>Places</value>
+  </data>
+  <data name="PortSet.Header" xml:space="preserve">
+    <value>Ollama connection port</value>
   </data>
   <data name="PromptBox.Header" xml:space="preserve">
     <value>Prompt</value>
@@ -209,6 +218,9 @@
   </data>
   <data name="SourceTypePlaces" xml:space="preserve">
     <value>Storages</value>
+  </data>
+  <data name="SourceTypeSettings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="StartSessionButton.Label" xml:space="preserve">
     <value>New Session</value>

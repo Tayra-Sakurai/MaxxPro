@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.VectorData.SqliteVec;
 using Cougar.Tools;
 using Cougar.ViewModels;
+using MaxxPro.ViewModels;
 using Microsoft.Agents.AI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
@@ -84,14 +85,24 @@ namespace MaxxPro
             services.AddSingleton<IModelTool<Place>, CaimanModelTool<Place>>();
             services.AddSingleton<IModelTool<Item>, CaimanModelTool<Item>>();
 
-            services.AddChatClient(
-                new OllamaApiClient(
-                    new Uri("http://localhost:11434/api"),
-                    "gemma4:e2b"));
+            services.AddTransient<SettingsViewModel>();
+
             services.AddEmbeddingGenerator(
-                new OllamaApiClient(
-                    new Uri("http://localhost:11434/api"),
-                    "embeddinggemma:latest"));
+                sp =>
+                {
+                    SettingsViewModel viewModel = sp.GetRequiredService<SettingsViewModel>();
+                    return new OllamaApiClient(
+                        new Uri($"http://localhost:{(int)viewModel.OllamaPort}"),
+                        viewModel.EmbeddingModelName);
+                });
+            services.AddChatClient(
+                sp =>
+                {
+                    SettingsViewModel viewModel = sp.GetRequiredService<SettingsViewModel>();
+                    return new OllamaApiClient(
+                        new Uri($"http://localhost:{(int)viewModel.OllamaPort}"),
+                        viewModel.ModelName);
+                });
 
             services.AddSqliteVectorStore(
                 _ => $"Data Source={System.IO.Path.Join(ApplicationData.GetDefault().LocalFolder.Path, "chathistory.db")}");

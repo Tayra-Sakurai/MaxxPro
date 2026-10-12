@@ -11,7 +11,7 @@
   <Identity
     Name="0c7be0e9-6bc5-49e2-8b01-72a832ec48e0"
     Publisher="CN=taira"
-    Version="0.0.1.0" />
+    Version="0.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="0c7be0e9-6bc5-49e2-8b01-72a832ec48e0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

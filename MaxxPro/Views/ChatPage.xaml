@@ -77,6 +77,7 @@
         <TextBox
             x:Uid="PromptBox"
             Text="{x:Bind chatViewModel.Prompt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            AcceptsReturn="True"
             Grid.Row="2"/>
 
         <CommandBar
